@@ -449,3 +449,44 @@ jobs:
           .github/workflows/scripts/unix_test.sh
         env:
           TI_WANTED_ARCHS: "metal,cpu"
+
+  build_and_test_aarch64:
+    name: Build and Test Aarch64
+    needs: [check_code_format, check_files]
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        python-version: ['cp36-cp36m', 'cp37-cp37m', 'cp38-cp38', 'cp39-cp39']
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    permissions:
+      packages: read
+      contents: read
+    env:
+      py: /opt/python/${{ matrix.python-version }}/bin/python
+      img: quay.io/pypa/manylinux2014_aarch64
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: Get sccache cache
+        uses: actions/cache@v2
+        with:
+          path: sccache_cache
+          key: sccache-manylinux2014-aarch64-${{matrix.with_cc}}-${{ github.sha }}
+          restore-keys: |
+            sccache-manylinux2014-aarch64-${{matrix.with_cc}}-
+
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1 
+      - name: Build
+        run:
+          docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+          ${{ env.img }} \
+          bash -exc '${{ env.py }} -m venv .env && \
+          ls && \
+          pwd && \
+          bash scripts/unix_build.sh && \
+          deactivate'
