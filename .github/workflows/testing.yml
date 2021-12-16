@@ -486,7 +486,8 @@ jobs:
           docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
+          source .env/bin/activate && \
           ls && \
           pwd && \
-          scripts/unix_build.sh && \
+          ./scripts/unix_build.sh && \
           deactivate'
