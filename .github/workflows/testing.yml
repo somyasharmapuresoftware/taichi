@@ -488,5 +488,5 @@ jobs:
           bash -exc '${{ env.py }} -m venv .env && \
           ls && \
           pwd && \
-          bash scripts/unix_build.sh && \
+          scripts/unix_build.sh && \
           deactivate'
