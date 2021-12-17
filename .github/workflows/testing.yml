@@ -489,5 +489,7 @@ jobs:
           source .env/bin/activate && \
           ls && \
           pwd && \
-          ./scripts/unix_build.sh && \
+          cd scripts && \
+          ls && \
+          ./unix_build.sh && \
           deactivate'
