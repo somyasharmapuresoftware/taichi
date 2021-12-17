@@ -482,7 +482,7 @@ jobs:
         id: qemu
         uses: docker/setup-qemu-action@v1 
       - name: Build
-        run:
+        run: |
           docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
