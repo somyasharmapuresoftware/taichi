@@ -487,9 +487,5 @@ jobs:
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
-          ls && \
-          pwd && \
-          cd scripts && \
-          ls && \
-          ./unix_build.sh && \
+          ./.github/workflows/scripts/unix_build.sh && \
           deactivate'
