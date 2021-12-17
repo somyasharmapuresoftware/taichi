@@ -28,6 +28,7 @@ setup_sccache() {
         chmod +x sccache-v0.2.15-x86_64-unknown-linux-musl/sccache
         export PATH=$(pwd)/sccache-v0.2.15-x86_64-unknown-linux-musl:$PATH
     elif [[ $(uname -m) == "arm64" ]]; then
+        yum install wget -y
         wget https://github.com/mozilla/sccache/releases/download/v0.2.15/sccache-v0.2.15-aarch64-apple-darwin.tar.gz
         tar -xzf sccache-v0.2.15-aarch64-apple-darwin.tar.gz
         chmod +x sccache-v0.2.15-aarch64-apple-darwin/sccache
