@@ -22,7 +22,7 @@ setup_sccache() {
     echo "sccache dir: $SCCACHE_DIR"
     ls -la "$SCCACHE_DIR"
 
-    if [[ $OSTYPE == "linux-"* ]]; then
+    if [[ $OSTYPE == "linux-"* && $(uname -m) == "x86_64" ]]; then
         wget https://github.com/mozilla/sccache/releases/download/v0.2.15/sccache-v0.2.15-x86_64-unknown-linux-musl.tar.gz
         tar -xzf sccache-v0.2.15-x86_64-unknown-linux-musl.tar.gz
         chmod +x sccache-v0.2.15-x86_64-unknown-linux-musl/sccache
