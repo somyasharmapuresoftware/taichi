@@ -487,7 +487,13 @@ jobs:
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
-          yum install wget libffi-devel libXrandr-devel libXinerama-devel libXcursor-devel libXi-devel clang -y && \
+          yum install wget libffi-devel libXrandr-devel libXinerama-devel libXcursor-devel libXi-devel -y && \
+          yum makecache && \
+          yum install gcc gcc-c++ yum-utils -y && \
+          yum-config-manager --enable extras && \
+          yum makecache && \
+          yum install clang && \
+          
           pip install numpy && \
           ./.github/workflows/scripts/unix_build.sh && \
           deactivate'
