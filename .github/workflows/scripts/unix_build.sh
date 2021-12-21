@@ -64,8 +64,10 @@ build() {
         PROJECT_TAGS="egg_info --tag-date"
     fi
 
-    if [[ $OSTYPE == "linux-"* ]]; then
+    if [[ $OSTYPE == "linux-"* && $(uname -m) == "x86_64" ]]; then
         EXTRA_ARGS="-p manylinux1_x86_64"
+    elif [[ $(uname -m) == "aarch64" ]]; then
+        EXTRA_ARGS="-p manylinux2014_aarch64"
     fi
     python3 misc/make_changelog.py origin/master ./ True
     python3 setup.py $PROJECT_TAGS bdist_wheel $EXTRA_ARGS
