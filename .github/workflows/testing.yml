@@ -492,8 +492,7 @@ jobs:
           yum install gcc gcc-c++ yum-utils -y && \
           yum-config-manager --enable extras && \
           yum makecache && \
-          yum install clang && \
-          
+          yum install clang -y && \
           pip install numpy && \
           ./.github/workflows/scripts/unix_build.sh && \
           deactivate'
