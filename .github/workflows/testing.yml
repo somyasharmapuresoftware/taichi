@@ -465,7 +465,6 @@ jobs:
     env:
       py: /opt/python/${{ matrix.python-version }}/bin/python
       img: quay.io/pypa/manylinux2014_aarch64
-      TAICHI_CMAKE_ARGS: -DTI_WITH_OPENGL:BOOL=OFF -DTI_WITH_CC:BOOL=${{ matrix.with_cc }} -DTI_WITH_VULKAN:BOOL=OFF -DTI_BUILD_TESTS:BOOL=ON -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
     steps:
       - uses: actions/checkout@v2
         with:
@@ -488,7 +487,6 @@ jobs:
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
-          -e TAICHI_CMAKE_ARGS && \
           yum install wget libffi-devel libXrandr-devel libXinerama-devel libXcursor-devel libXi-devel -y && \
           yum makecache && \
           yum install gcc gcc-c++ yum-utils -y && \
