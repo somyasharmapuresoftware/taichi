@@ -483,7 +483,7 @@ jobs:
         uses: docker/setup-qemu-action@v1 
       - name: Build
         run: |
-          docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+          docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws -e TAICHI_CMAKE_ARGS \
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
