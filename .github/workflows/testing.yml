@@ -494,6 +494,7 @@ jobs:
           yum makecache && \
           yum install clang -y && \
           pip install numpy && \
+          whereis llvm && \
           export LLVM_DIR=/usr/local/Cellar/llvm\@3/3.4.2/lib/cmake && \
           ./.github/workflows/scripts/unix_build.sh && \
           deactivate'
