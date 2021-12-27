@@ -489,12 +489,15 @@ jobs:
           source .env/bin/activate && \
           yum install wget libffi-devel libXrandr-devel libXinerama-devel libXcursor-devel libXi-devel -y && \
           yum makecache && \
-          yum install gcc gcc-c++ yum-utils -y && \
-          yum-config-manager --enable extras && \
-          yum makecache && \
-          yum install clang -y && \
+          #yum install gcc gcc-c++ yum-utils -y && \
+          #yum-config-manager --enable extras && \
+          #yum makecache && \
+          #yum install clang -y && \
+          #whereis llvm && \
+          #export LLVM_DIR=/usr/local/Cellar/llvm\@3/3.4.2/lib/cmake && \
           pip install numpy && \
-          whereis llvm && \
-          export LLVM_DIR=/usr/local/Cellar/llvm\@3/3.4.2/lib/cmake && \
+          yum install wget -y && \
+          wget https://download-ib01.fedoraproject.org/pub/epel/7/aarch64/Packages/l/llvm-libs-3.4.2-9.el7.aarch64.rpm https://download-ib01.fedoraproject.org/pub/epel/7/aarch64/Packages/l/llvm-3.4.2-9.el7.aarch64.rpm && \
+          rpm -i llvm-3.4.2-9.el7.aarch64.rpm llvm-libs-3.4.2-9.el7.aarch64.rpm && \
           ./.github/workflows/scripts/unix_build.sh && \
           deactivate'
